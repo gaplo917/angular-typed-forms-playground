@@ -1,0 +1,60 @@
+<div class="fn-btn-container">
+  <button mat-raised-button color="accent">Full Sync</button>
+  <button mat-raised-button color="accent">Partial Sync</button>
+  <button mat-raised-button color="accent">Reset</button>
+  <button mat-raised-button color="accent">Generate 500 items</button>
+</div>
+
+<mat-card [class.mat-elevation-z0]="true">
+  <mat-card
+    [class.mat-elevation-z8]="true"
+    *ngFor="let user of userTable.rows"
+    class="user-card"
+  >
+    <mat-card-title>
+      {{ user.controls.id.value || 'New User ID' }}
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>username</mat-label>
+        <input required matInput [formControl]="user.controls.username" />
+      </mat-form-field>
+
+      <mat-checkbox [formControl]="user.controls.isStudent">Is Student?</mat-checkbox>
+
+      <mat-form-field appearance="fill" *ngIf="user.controls.age">
+        <mat-label>Font size</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Ex. 12"
+          [formControl]="user.controls.age"
+          min="10"
+        />
+      </mat-form-field>
+
+      <div *ngFor="let address of user.controls.addresses.rows">
+        <mat-form-field appearance="fill">
+          <mat-label>address 1</mat-label>
+          <input matInput [formControl]="address.controls.address1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>address 2</mat-label>
+          <input matInput [formControl]="address.controls.address2" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>address 3</mat-label>
+          <input matInput [formControl]="address.controls.address3" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="user.controls.addresses.appendRow()">
+        + New Address
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <button mat-button color="accent" (click)="userTable.appendRow()">+ Add User</button>
+</mat-card>
