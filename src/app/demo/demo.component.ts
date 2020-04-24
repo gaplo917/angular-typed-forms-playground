@@ -16,4 +16,8 @@ export class DemoComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  trackByIndex(index: number) {
+    return index
+  }
 }

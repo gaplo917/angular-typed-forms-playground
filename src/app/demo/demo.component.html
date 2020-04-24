@@ -8,7 +8,7 @@
 <mat-card [class.mat-elevation-z0]="true">
   <mat-card
     [class.mat-elevation-z8]="true"
-    *ngFor="let user of userTable.rows"
+    *ngFor="let user of userTable.rows; trackBy: trackByIndex"
     class="user-card"
   >
     <mat-card-title>
@@ -33,7 +33,7 @@
         />
       </mat-form-field>
 
-      <div *ngFor="let address of user.controls.addresses.rows">
+      <div *ngFor="let address of user.controls.addresses.rows; trackBy: trackByIndex">
         <mat-form-field appearance="fill">
           <mat-label>address 1</mat-label>
           <input matInput [formControl]="address.controls.address1" />
